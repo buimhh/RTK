@@ -13,7 +13,7 @@ set(CTEST_MEMORYCHECK_COMMAND /usr/bin/valgrind)
 set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--gen-suppressions=all --child-silent-after-fork=yes -q --leak-check=yes --show-reachable=yes --num-callers=50 -v")
 set(CTEST_MEMORYCHECK_SUPPRESSIONS_FILE "${CTEST_SCRIPT_DIRECTORY}/RTK.supp")
 set(CTEST_CUSTOM_MEMCHECK_IGNORE "RTKInDoxygenGroup")
-set(CONFIGURE_OPTIONS -DFAST_TESTS_NO_CHECKS=TRUE -DCMAKE_CXX_STANDARD=14)
+set(CONFIGURE_OPTIONS -DFAST_TESTS_NO_CHECKS=TRUE -DCMAKE_CXX_STANDARD=17)
 set(dashboard_do_memcheck true)
 
 include("${CTEST_SCRIPT_DIRECTORY}/rtk_common.cmake")
