@@ -10,12 +10,10 @@ foreach(ITK_VERSION "master")
         if(${STATIC_SHARED} STREQUAL Shared)
           set(BUILD_SHARED_LIBS ON)
         endif()
-        set(CTEST_BUILD_NAME "InITK-Windows7-64bit-Ninja-ITK${ITK_VERSION}-${STATIC_SHARED}-${DEBUG_RELEASE}-FFTW${FFTW}")
+        set(CTEST_BUILD_NAME "CudaCommon-InITK-Windows7-64bit-Ninja-ITK${ITK_VERSION}-${STATIC_SHARED}-${DEBUG_RELEASE}-FFTW${FFTW}")
         set(CTEST_SOURCE_DIRECTORY "C:\\src\\itk\\ITK-${ITK_VERSION}")
         file(REMOVE_RECURSE "${CTEST_SOURCE_DIRECTORY}\\Modules\\Remote\\CudaCommon")
-        file(REMOVE_RECURSE "${CTEST_SOURCE_DIRECTORY}\\Modules\\Remote\\RTK")
-
-        set(CTEST_BINARY_DIRECTORY "C:\\RTK-Ninja-${STATIC_SHARED}-${FFTW}")
+        set(CTEST_BINARY_DIRECTORY "C:\\CudaCommon-Ninja-${STATIC_SHARED}-${FFTW}")
         set(CTEST_BUILD_CONFIGURATION ${DEBUG_RELEASE})
         set(CTEST_CONFIGURATION_TYPE ${DEBUG_RELEASE})
 
@@ -25,13 +23,11 @@ foreach(ITK_VERSION "master")
         ctest_update()
 
         set(cfg_options
-            -DExternalData_OBJECT_STORES:PATH=C:/src/rtk/data
             -DITK_FUTURE_LEGACY_REMOVE:BOOL=ON
             -DITK_LEGACY_REMOVE:BOOL=ON
             -DITK_BUILD_DEFAULT_MODULES:BOOL=OFF
             -DModule_CudaCommon:BOOL=ON
-            -DModule_RTK:BOOL=ON
-            -DModule_RTK_GIT_TAG:STRING=master
+            -DModule_CudaCommon_GIT_TAG:STRING=ITKConfigTest
             -DBUILD_EXAMPLES:BOOL=OFF
             -DBUILD_TESTING:BOOL=ON
             -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS}
