@@ -73,7 +73,7 @@
    CUDA
    Memcheck:Leak
    ...
-   obj:*/libcublas.so.*
+   obj:*/libcublas*.so.*
    ...
 }
 {

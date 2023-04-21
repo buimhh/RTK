@@ -12,6 +12,7 @@ foreach(ITK_VERSION "master" "release")
         endif()
         set(CTEST_BUILD_NAME "InITK-Linux-ITK${ITK_VERSION}-${STATIC_SHARED}-${DEBUG_RELEASE}-FFTW${FFTW}")
         set(CTEST_SOURCE_DIRECTORY "/home/srit/src/rtk/dashboard_tests/ITK-${ITK_VERSION}")
+        file(REMOVE_RECURSE "${CTEST_SOURCE_DIRECTORY}/Modules/Remote/CudaCommon")
         file(REMOVE_RECURSE "${CTEST_SOURCE_DIRECTORY}/Modules/Remote/RTK")
         set(CTEST_BINARY_DIRECTORY "/home/srit/src/rtk/dashboard_tests/${CTEST_BUILD_NAME}")
         set(CTEST_BUILD_CONFIGURATION ${DEBUG_RELEASE})
@@ -26,6 +27,8 @@ foreach(ITK_VERSION "master" "release")
             -DITK_FUTURE_LEGACY_REMOVE:BOOL=ON
             -DITK_LEGACY_REMOVE:BOOL=ON
             -DITK_BUILD_DEFAULT_MODULES:BOOL=OFF
+            -DModule_CudaCommon:BOOL=ON
+            -DModule_CudaCommon_GIT_TAG:STRING=master
             -DModule_RTK:BOOL=ON
             -DModule_RTK_GIT_TAG:STRING=master
             -DBUILD_EXAMPLES:BOOL=OFF
