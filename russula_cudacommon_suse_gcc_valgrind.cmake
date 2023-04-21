@@ -1,0 +1,37 @@
+set(CTEST_SITE "russula.clb")
+set(ENV{ITK_DIR} "/home/srit/src/itk/lin64-RelWithDebInfo")
+set(ENV{CXXFLAGS} "-fPIC --param=max-vartrack-size=60000000")
+set(ENV{VALGRIND_LIB} "/usr/lib64/valgrind")
+set(CTEST_MEMORYCHECK_COMMAND /usr/bin/valgrind)
+set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--gen-suppressions=all --child-silent-after-fork=yes -q --leak-check=yes --show-reachable=yes --num-callers=50 -v")
+set(CTEST_MEMORYCHECK_SUPPRESSIONS_FILE "${CTEST_SCRIPT_DIRECTORY}/RTK.supp")
+set(CTEST_CUSTOM_MEMCHECK_IGNORE "CudaCommonInDoxygenGroup")
+set(CTEST_BUILD_FLAGS -j16)
+set(CTEST_CMAKE_GENERATOR "Unix Makefiles")
+set(CTEST_GIT_COMMAND "git")
+set(CTEST_BUILD_NAME "CudaCommon-Linux-64bit-gcc-valgrind")
+set(CTEST_SOURCE_DIRECTORY "/home/srit/src/rtk/dashboard_tests/CudaCommon-master")
+set(CTEST_BINARY_DIRECTORY "/home/srit/src/rtk/dashboard_tests/CudaCommon_lin64_gcc_system_itk4_valgrind")
+set(CTEST_BUILD_CONFIGURATION RelWithDebInfo)
+set(CTEST_CONFIGURATION_TYPE RelWithDebInfo)
+ctest_empty_binary_directory(${CTEST_BINARY_DIRECTORY})
+ctest_start(Nightly)
+ctest_update()
+set(cfg_options
+    -DBUILD_TESTING:BOOL=ON
+    -DCMAKE_CXX_STANDARD=17
+    -DBUILD_SHARED_LIBS:BOOL=OFF)
+ctest_configure(OPTIONS "${cfg_options}")
+ctest_build()
+ctest_test()
+ctest_memcheck()
+
+# Use RTK parameters for submission
+set(CTEST_PROJECT_NAME "RTK")
+set(CTEST_NIGHTLY_START_TIME "1:00:00 UTC")
+set(CTEST_DROP_METHOD "http")
+set(CTEST_DROP_SITE "my.cdash.org")
+set(CTEST_DROP_LOCATION "/submit.php?project=RTK")
+set(CTEST_DROP_SITE_CDASH TRUE)
+ctest_submit()
+
