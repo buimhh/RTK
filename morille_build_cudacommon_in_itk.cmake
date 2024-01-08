@@ -27,7 +27,7 @@ foreach(ITK_VERSION "master")
             -DITK_LEGACY_REMOVE:BOOL=ON
             -DITK_BUILD_DEFAULT_MODULES:BOOL=OFF
             -DModule_CudaCommon:BOOL=ON
-            -DModule_CudaCommon_GIT_TAG:STRING=ITKConfigTest
+            -DModule_CudaCommon_GIT_TAG:STRING=master
             -DBUILD_EXAMPLES:BOOL=OFF
             -DBUILD_TESTING:BOOL=ON
             -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS}
